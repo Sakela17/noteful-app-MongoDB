@@ -9,6 +9,7 @@ const passport = require('passport');
 const { PORT, MONGODB_URI } = require('./config');
 
 const localStrategy = require('./passport/local');
+const jwtStrategy = require('./passport/jwt');
 
 const notesRouter = require('./routes/notes');
 const foldersRouter = require('./routes/folders');
@@ -31,13 +32,14 @@ app.use(express.static('public'));
 app.use(express.json());
 
 passport.use(localStrategy);
+passport.use(jwtStrategy);
 
 // Mount routers on /api
 app.use('/api/notes', notesRouter);
 app.use('/api/folders', foldersRouter);
 app.use('/api/tags', tagsRouter);
 app.use('/api/users', usersRouter);
-app.use('/api/login', authRouter);
+app.use('/api/', authRouter);
 
 // Catch-all 404
 app.use(function (req, res, next) {
