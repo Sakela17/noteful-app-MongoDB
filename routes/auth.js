@@ -17,13 +17,27 @@ function createAuthToken(user) {
 const localAuth = passport.authenticate('local', options);
 const jwtAuth = passport.authenticate('jwt', options);
 
+// router.post('/login', localAuth, (req, res) => {
+//   // console.log(`${req.user.username} successfully logged in.`);
+//   const authToken = createAuthToken(req.user);
+//   console.log('**************** AUTH TOKEN', authToken);
+//   res.json({ authToken });
+// });
 
-router.post('/login', localAuth, (req, res) => {
-  // console.log(`${req.user.username} successfully logged in.`);
-  const authToken = createAuthToken(req.user);
-  console.log('**************** AUTH TOKEN', authToken);
-  res.json({ authToken });
+// Implement passport.authenticate custom callback
+router.post('/login', function(req, res, next) {
+  passport.authenticate('local', options, function(err, user, response) {
+    if(!response.success) {
+      const authToken = createAuthToken(user);
+      res.json({ authToken });
+    } else {
+      res.status(401).json({
+        message: response.message
+      });
+    }
+  })(req, res, next);
 });
+
 
 router.post('/refresh', jwtAuth, (req, res) => {
   const authToken = createAuthToken(req.user);

@@ -23,24 +23,33 @@ const localStrategy = new LocalStrategy((username, password, done) => {
         });
       }
 
-      const isValid = user.validatePassword(password);
+      return user.validatePassword(password)
+        .then(isValid => {
+          if(!isValid) {
+            console.log('************** is NOT VALID', isValid);
 
-      if(!isValid) {
-        return Promise.reject({
-          reason: 'LoginError',
-          message: 'Incorrect username',
-          location: password
-        })
-      }
+            return Promise.reject({
+              reason: 'LoginError',
+              message: 'Incorrect password',
+              location: password
+            })
+          }
 
-      return done(null, user);
+          //Valid credintials -> trigger successRedirect
+          return done(null, user, { success: true });
+        });
 
     })
     .catch(err => {
+      console.log('************ LOGIN', err);
 
       if(err.reason === 'LoginError') {
-        return done(null, false);
+        //Credintials are invalid -> trigger failureRedirect with 401 status - unauthorized
+        console.log('************ LOGIN ERROR CATCH MESSAGE', err.message);
+        return done(null, false, { success: false, message: err.message });
       }
+      console.log('*************SECOND RETURN DONE********', done(err));
+      // return done(null, false);
       return done(err);
 
     })
