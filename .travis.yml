@@ -1,3 +1,7 @@
 language: node_js
 node_js: node
 services: mongodb
+deploy:
+  provider: heroku
+  api_key: 5a785a53-665e-4f74-a3dc-be0295ef5c9a
+  app: evening-wave-51959
