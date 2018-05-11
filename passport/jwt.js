@@ -10,7 +10,7 @@ const options = {
 };
 
 const jwtStrategy = new JwtStrategy(options, (payload, done) => {
-  console.log('********************* PAY LOAD', payload);
+  // console.log('********************* PAY LOAD', payload);
   done(null, payload.user);
 });
 

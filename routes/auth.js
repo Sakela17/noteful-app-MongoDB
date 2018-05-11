@@ -27,14 +27,19 @@ const jwtAuth = passport.authenticate('jwt', options);
 // Implement passport.authenticate custom callback
 router.post('/login', function(req, res, next) {
   passport.authenticate('local', options, function(err, user, response) {
-    if(!response.success) {
+    console.log('****************** err', err);
+    if(response.success) {
       const authToken = createAuthToken(user);
       res.json({ authToken });
-    } else {
+    } else if(!response.success) {
       res.status(401).json({
         message: response.message
       });
-    }
+    } /* else {
+      res.status(400).json({
+        message: response.message
+      });
+    } */
   })(req, res, next);
 });
 

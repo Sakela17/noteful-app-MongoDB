@@ -10,7 +10,6 @@ const localStrategy = new LocalStrategy((username, password, done) => {
 
   let user;
 
-  //Find user in DB
   User.findOne({ username })
     .then(result => {
       user = result;
@@ -22,23 +21,21 @@ const localStrategy = new LocalStrategy((username, password, done) => {
           location: username
         });
       }
-
-      return user.validatePassword(password)
-        .then(isValid => {
-          if(!isValid) {
-            console.log('************** is NOT VALID', isValid);
-
-            return Promise.reject({
-              reason: 'LoginError',
-              message: 'Incorrect password',
-              location: password
-            })
-          }
-
-          //Valid credintials -> trigger successRedirect
-          return done(null, user, { success: true });
-        });
-
+    })
+    .then(() => {
+      return user.validatePassword(password);
+    })
+    .then(isValid => {
+      if(!isValid) {
+        return Promise.reject({
+          reason: 'LoginError',
+          message: 'Incorrect password',
+          location: password
+        })
+      }
+    })
+    .then(() => {
+      return done(null, user, { success: true });
     })
     .catch(err => {
       console.log('************ LOGIN', err);
@@ -49,9 +46,7 @@ const localStrategy = new LocalStrategy((username, password, done) => {
         return done(null, false, { success: false, message: err.message });
       }
       console.log('*************SECOND RETURN DONE********', done(err));
-      // return done(null, false);
       return done(err);
-
     })
 
 });
