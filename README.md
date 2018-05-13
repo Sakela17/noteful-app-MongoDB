@@ -3,8 +3,8 @@ Noteful App
 I worked on this project while studying for Engineering Immersion program at Thinkful.
 The goal was to create a Node/Express app to host a client, serve a RESTful API to the client, and to create a Mongo-backed persistence layer.
 
-##Getting Started
-####Local Testing and Deployment
+## Getting Started
+#### Local Testing and Deployment
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
 * Install [Node](https://nodejs.org/en/), which comes with [NPM](https://www.npmjs.com/)
 * In the terminal, run command ```node --version``` to confirm the installation
@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 Now you can test end points with tools like [Postman](https://www.getpostman.com/) or navigate to ```http://localhost:8080``` in the browser.
 
-##Deployment on Heroku
+## Deployment on Heroku
 These instruction will help you to set up database on mLab and deploy this app on Heroku.
 * Create [Heroku](https://signup.heroku.com/identity) account
 * Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) command line
@@ -44,7 +44,8 @@ __*In the next steps, you will add Mongo database hosted on mLab to your Heroku 
 
 If everything went well, now this app is deployed on Heroku using mLab to host Mongo database. 
  
- ##Built With
+ ## Built With
+ 
  [Node.js](https://nodejs.org/en/)
  
  [Express.js](https://expressjs.com/)
