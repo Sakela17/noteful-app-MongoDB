@@ -1,7 +1,7 @@
 Noteful App
 ============================
 I worked on this project while studying for Engineering Immersion program at Thinkful.
-The goal was to create a Node/Express app to host a client and serve a RESTful API to the client.
+The goal was to create a Node/Express app to host a client, serve a RESTful API to the client, and to create a Mongo-backed persistence layer.
 
 ##Getting Started
 ####Local Testing and Deployment
@@ -21,12 +21,13 @@ Now you can test end points with tools like [Postman](https://www.getpostman.com
 ##Deployment on Heroku
 These instruction will help you to set up database on mLab and deploy this app on Heroku.
 * Create [Heroku](https://signup.heroku.com/identity) account
-* Install Heroku [command line](https://devcenter.heroku.com/articles/heroku-cli)
+* Install [Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli) command line
 * In the terminal, run ```heroku --version``` to confirm the installation
 * Type ```heroku login``` and enter your Heroku username and password
 * ```cd``` into your project directory
 * Create new remote Heroku repository by running ```heroku create``` (make sure to commit beforehand)
-* Run ```git push heroku master``` to push repo to Heroku platform
+* Run ```git push heroku master``` to push the repo to Heroku platform
+__*In the next steps, you will add Mongo database hosted on mLab to your Heroku application*__ 
 * Sign up for free [mLab](https://mlab.com/signup/) account
 * From your [mLab home screen](https://mlab.com/home) click on MongoDB Deployments -> Create new
 * Under plan options, choose "Amazon Web Services" and "Sandbox" as the plan type -> Continue
@@ -38,9 +39,26 @@ These instruction will help you to set up database on mLab and deploy this app o
     1. JWT_SECRET
     2. JWT_EXPIRY
     3. MONGODB_URI (use URI from the following step subbing in your username and password)
-* Open [mLab](https://mlab.com/home), click on the DB -> copy URI that appears under the label "To connect using a driver via the standard MongoDB URI"
+* Open [mLab](https://mlab.com/home), select the DB -> copy URI that appears under the label "To connect using a driver via the standard MongoDB URI"
 * Back in [Heroku](https://id.heroku.com/login) click on the project -> 'Open app' button. (optionally: launch the app by running ```heroku open``` in the terminal)
 
 If everything went well, now this app is deployed on Heroku using mLab to host Mongo database. 
  
+ ##Built With
+ [Node.js](https://nodejs.org/en/)
  
+ [Express.js](https://expressjs.com/)
+ 
+ [MongoDB](https://www.mongodb.com/)
+ 
+ [Mongoose.js](http://mongoosejs.com/)
+ 
+ [Passport](http://www.passportjs.org/)
+ 
+ [JWT](https://jwt.io/)
+ 
+ [bcrypt](https://www.npmjs.com/package/bcrypt)
+ 
+ [Mocha](https://mochajs.org/)
+ 
+ [Chai](http://www.chaijs.com/)
